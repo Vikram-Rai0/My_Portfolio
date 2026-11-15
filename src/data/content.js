@@ -83,32 +83,14 @@ export const techMarquee = [
  * --------------------------------------------------
  * liveHref is optional. Projects without a public
  * deployment simply show the GitHub link.
+ *
+ * images: up to 5 screenshots per project, stored in
+ * public/projects/<project-id>/1.jpg ... 5.jpg
+ * (about 1600x1000). Missing images fall back to the
+ * project illustration.
  */
 
 export const projects = [
-  {
-    id: "incident-flow",
-    index: "03",
-    year: "2026",
-    title: "IncidentFlow",
-
-    description:
-      "A real-time incident management system where responders and admins coordinate on live incidents, built to explore state management, concurrency and role-based access in a full-stack TypeScript codebase.",
-
-    highlights: [
-      "JWT authentication",
-      "Atomic task claiming, so two responders can't take the same task",
-      "Incident state machine with controlled status transitions",
-      "Restricted access: only added responders and admins can open an incident",
-      "Real-time sync across clients with Socket.IO",
-      "PostgreSQL (Prisma) and Redis behind a Node.js/Express API",
-    ],
-
-    stack: ["Next.js", "TypeScript", "Node.js", "Express.js", "PostgreSQL", "Redis", "Socket.IO", "Tailwind CSS"],
-
-    githubHref: "https://github.com/Vikram-Rai0/Incendent_Flow",
-    visual: "architecture",
-  },
   {
     id: "alleyoops",
     index: "01",
@@ -135,11 +117,49 @@ export const projects = [
     liveHref: "https://alley-oops.vercel.app/",
     githubHref: "https://github.com/Vikram-Rai0/AlleyOops",
     visual: "availability",
+    images: [
+      "/projects/alleyoops/1.jpg",
+      "/projects/alleyoops/2.jpg",
+      "/projects/alleyoops/3.jpg",
+      "/projects/alleyoops/4.jpg",
+      "/projects/alleyoops/5.jpg",
+    ],
+  },
+
+  {
+    id: "incident-flow",
+    index: "02",
+    year: "2026",
+    title: "IncidentFlow",
+
+    description:
+      "A real-time incident management system where responders and admins coordinate on live incidents, built to explore state management, concurrency and role-based access in a full-stack TypeScript codebase.",
+
+    highlights: [
+      "JWT authentication",
+      "Atomic task claiming, so two responders can't take the same task",
+      "Incident state machine with controlled status transitions",
+      "Restricted access: only added responders and admins can open an incident",
+      "Real-time sync across clients with Socket.IO",
+      "PostgreSQL (Prisma) and Redis behind a Node.js/Express API",
+    ],
+
+    stack: ["Next.js", "TypeScript", "Node.js", "Express.js", "PostgreSQL", "Redis", "Socket.IO", "Tailwind CSS"],
+
+    githubHref: "https://github.com/Vikram-Rai0/Incendent_Flow",
+    visual: "architecture",
+   images: [
+  "/projects/incident-flow/login.png",
+  "/projects/incident-flow/dashboard.png",
+  "/projects/incident-flow/declare.png",
+  "/projects/incident-flow/incident-list.png",
+  "/projects/incident-flow/incident-room.png",
+],
   },
 
   {
     id: "gradify-classroom",
-    index: "02",
+    index: "03",
     year: "2025",
     title: "Gradify Classroom",
 
@@ -160,6 +180,13 @@ export const projects = [
 
     githubHref: "https://github.com/Vikram-Rai0/Gradify_CR",
     visual: "architecture",
+    images: [
+      "/projects/gradify-classroom/1.jpg",
+      "/projects/gradify-classroom/2.jpg",
+      "/projects/gradify-classroom/3.jpg",
+      "/projects/gradify-classroom/4.jpg",
+      "/projects/gradify-classroom/5.jpg",
+    ],
   },
 ];
 
@@ -386,9 +413,7 @@ export const experience = [
  */
 
 export const skillsNote =
-  "Self-assessed on a rough scale, not verified measurements. They show where I’m most confident and where I’m still learning.";
-
-
+  "Technical skill levels are rough self-assessments, not formal measurements. They reflect my current experience and areas for growth.";
 export const skillGroups = [
   {
     label: "Frontend",
@@ -437,19 +462,23 @@ export const skillGroups = [
 ];
 
 export const skillExtras = {
-  familiar: [],
   improving: [
-    "Backend scalability and system design",
-    "Application architecture and performance optimization",
-    "Testing and debugging",
+    "Scalable backend development",
+    "System design and application architecture",
+    "Testing and performance optimization",
   ],
-  learning: ["AI-Powered Application Development"],
+
+  learning: [
+    "AI-Powered Application Development",
+  ],
+
   softSkills: [
-    "Clear communication and work well with others having effective collaboration",
-    "Approach challenges with a practical, problem-solving mindset.",
-    "Adapt to new technologies and learn continuously.",
-    "Take responsibility for tasks and manage time effectively.",
-  ],
+  "I communicate clearly and listen to different perspectives",
+  "I enjoy working with others and sharing ideas",
+  "I approach challenges with critical thinking and practical solutions",
+  "I adapt to new situations and stay open to learning",
+  "I manage my time well and take responsibility for my work",
+],
 };
 
 /**
