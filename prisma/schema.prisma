@@ -1,0 +1,58 @@
+// Prisma 7: the connection URL lives in prisma.config.js (CLI) and in
+// src/lib/db.js (runtime, via the pg driver adapter).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// A portfolio project plus its case-study content.
+model Project {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  order       Int      @default(0)
+  year        String
+  status      String?
+  title       String
+  tagline     String?
+  description String
+  highlights  String[]
+  stack       String[]
+  liveUrl     String?
+  githubUrl   String
+  visual      String   @default("availability")
+  images      String[]
+  featured    Boolean  @default(true)
+  published   Boolean  @default(true)
+  /// overview, problem, objectives, features, alsoUsed, architecture,
+  /// process, challenges, caseStudy, technicalNotes (validated by zod)
+  details     Json     @default("{}")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([published, order])
+}
+
+/// Messages submitted through the contact form.
+model Message {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  body      String
+  ipHash    String?
+  userAgent String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+/// Fixed-window counters for rate limiting (contact form, admin login).
+model RateLimit {
+  key         String   @id
+  count       Int
+  windowStart DateTime
+}
