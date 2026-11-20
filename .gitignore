@@ -1,6 +1,16 @@
 node_modules/
-dist/
+.next/
+out/
 .env
 .env.*
+!.env.example
 *.local
 *.tsbuildinfo
+next-env.d.ts
+.vercel
+
+
+# logs and OS files
+npm-debug.log*
+.DS_Store
+Thumbs.db
