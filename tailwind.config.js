@@ -1,8 +1,7 @@
-
 /** @type {import("tailwindcss").Config} */
 export default {
   darkMode: "class",
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: ["./src/**/*.{js,jsx}"],
   theme: {
     extend: {
       colors: {
@@ -25,13 +24,14 @@ export default {
       },
       fontFamily: {
         sans: [
+          "var(--font-inter)",
           "Inter",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
           "sans-serif",
         ],
-        mono: ["IBM Plex Mono", "ui-monospace", "SFMono-Regular", "monospace"],
+        mono: ["var(--font-plex-mono)", "IBM Plex Mono", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       letterSpacing: {
         widest2: "0.2em",
