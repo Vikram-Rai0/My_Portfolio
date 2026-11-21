@@ -1,4 +1,4 @@
-import { experience } from "../data/content";
+import { experience } from "@/data/content";
 import Reveal from "./Reveal";
 
 export default function Experience() {
