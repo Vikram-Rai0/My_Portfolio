@@ -1,4 +1,4 @@
-import { aboutIntro, mindsetPillars } from "../data/content";
+import { aboutIntro, mindsetPillars } from "@/data/content";
 import Reveal from "./Reveal";
 
 export default function About() {
