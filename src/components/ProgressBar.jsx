@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 
 /** Thin bar that fills to `value`% the first time it scrolls into view. */
