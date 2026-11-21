@@ -1,5 +1,5 @@
-import { footer } from "../data/content";
-import { linkProps } from "../utils/links";
+import { footer } from "@/data/content";
+import { linkProps } from "@/lib/links";
 
 export default function Footer() {
   return (
@@ -28,7 +28,7 @@ export default function Footer() {
 
         <div className="sm:text-right">
           <p className="font-mono text-[11px] text-ink-muted">
-            © {footer.year} {footer.name}
+            © {new Date().getFullYear()} {footer.name}
           </p>
           <p className="font-mono text-[11px] text-ink-muted">
             Built with {footer.builtWith}
