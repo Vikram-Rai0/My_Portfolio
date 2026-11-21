@@ -1,7 +1,10 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import Image from "next/image";
+import Link from "next/link";
 import { getVisual } from "./visuals";
-import { linkProps } from "../utils/links";
+import { linkProps } from "@/lib/links";
 
 const SLIDE_MS = 2000;
 
@@ -72,13 +75,14 @@ function ProjectMedia({ project, Visual, expanded, handlers }) {
     >
       {images.length > 0 ? (
         images.map((src, i) => (
-          <img
+          <Image
             key={src}
             src={src}
             alt={`${project.title} screenshot ${i + 1} of ${images.length}`}
             aria-hidden={i !== current}
+            fill
+            sizes="(min-width: 1024px) 480px, (min-width: 640px) 420px, 88vw"
             loading={i === 0 ? "eager" : "lazy"}
-            decoding="async"
             onError={() => setFailed((previous) => new Set(previous).add(src))}
             className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-700 ease-in-out ${
               i === current ? "opacity-100" : "opacity-0"
@@ -182,7 +186,7 @@ export default function ProjectCard({ project }) {
             </div>
 
             <Link
-              to={`/projects/${project.id}`}
+              href={`/projects/${project.id}`}
               aria-label={`Learn more about ${project.title}`}
               className={`inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-ink px-4 py-2 font-mono text-[11px] uppercase tracking-wide text-paper transition-all duration-300 hover:-translate-y-0.5 ${BUTTON_SHADOW}`}
             >
