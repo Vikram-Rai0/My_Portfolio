@@ -1,7 +1,8 @@
+"use client";
 
 import { useEffect, useState } from "react";
-import { navLinks, siteMeta } from "../data/content";
-import { linkProps } from "../utils/links";
+import { navLinks, siteMeta } from "@/data/content";
+import { linkProps } from "@/lib/links";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
