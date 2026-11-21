@@ -1,19 +1,9 @@
 
-import { useEffect, useRef } from "react";
-
-import {
-  developerPresenceLinks,
-  github,
-} from "../data/content";
-
-import {
-  useGitHubContributions,
-  useGitHubPinned,
-  useGitHubProfile,
-} from "../hooks/useGitHubData";
-
-import { linkProps } from "../utils/links";
+import { developerPresenceLinks, github } from "@/data/content";
+import { linkProps } from "@/lib/links";
+import { getGitHubData } from "@/lib/github";
 import Reveal from "./Reveal";
+import ScrollToEnd from "./ScrollToEnd";
 
 const LEVEL_CLASSES = [
   "bg-line/60",
@@ -34,33 +24,8 @@ const dayLabel = new Intl.DateTimeFormat("en", {
   year: "numeric",
 });
 
-function LoadingCard({ className = "" }) {
-  return (
-    <div
-      className={`animate-pulse rounded-xl bg-line/50 ${className}`}
-      aria-hidden="true"
-    />
-  );
-}
-
-function RetryButton({ onClick }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="mt-3 font-mono text-[12px] uppercase tracking-wide text-forest underline underline-offset-4 hover:text-ink"
-    >
-      Try again
-    </button>
-  );
-}
-
 // GitHub profile card.
 function ProfileCard({ state }) {
-  if (state.status === "loading") {
-    return <LoadingCard className="h-[210px]" />;
-  }
-
   const profile = state.data;
   const name = profile?.name || github.username;
 
@@ -71,7 +36,13 @@ function ProfileCard({ state }) {
           Unable to load GitHub profile.
         </p>
 
-        <RetryButton onClick={state.retry} />
+        <a
+          href={github.profileHref}
+          {...linkProps(github.profileHref)}
+          className="mt-3 font-mono text-[12px] uppercase tracking-wide text-forest underline underline-offset-4 hover:text-ink"
+        >
+          View it on GitHub
+        </a>
       </div>
     );
   }
@@ -147,28 +118,12 @@ function ProfileCard({ state }) {
 // GitHub contribution calendar.
 
 function ContributionGraph({ state }) {
-  const scrollRef = useRef(null);
-
-  useEffect(() => {
-    const node = scrollRef.current;
-
-    if (node && state.status === "ready") {
-      node.scrollLeft = node.scrollWidth;
-    }
-  }, [state.status, state.data]);
-
-  if (state.status === "loading") {
-    return <LoadingCard className="h-[210px]" />;
-  }
-
   if (state.status === "error" || !state.data?.days?.length) {
     return (
       <div className="flex min-h-[210px] flex-col items-start justify-center rounded-xl border border-line bg-paper p-6">
         <p className="text-[14px] text-ink-soft">
           The contribution graph couldn't be loaded right now.
         </p>
-
-        <RetryButton onClick={state.retry} />
 
         <a
           href={github.profileHref}
@@ -234,8 +189,7 @@ function ContributionGraph({ state }) {
         contributions in {year}
       </p>
 
-      <div
-        ref={scrollRef}
+      <ScrollToEnd
         className="mt-5 overflow-x-auto pb-2"
         role="group"
         aria-label={`GitHub contributions calendar for ${year}`}
@@ -313,7 +267,7 @@ function ContributionGraph({ state }) {
             })
           )}
         </div>
-      </div>
+      </ScrollToEnd>
 
       {/* Contribution legend */}
       <div
@@ -338,33 +292,12 @@ function ContributionGraph({ state }) {
 
 // Selected GitHub repositories.
 function RepoList({ state }) {
-  if (state.status === "loading") {
-    return (
-      <div
-        className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2"
-        aria-hidden="true"
-      >
-        {Array.from(
-          { length: github.pinnedRepos.length },
-          (_, index) => (
-            <LoadingCard
-              key={index}
-              className="h-[110px]"
-            />
-          )
-        )}
-      </div>
-    );
-  }
-
   if (state.status === "error" || !state.data?.length) {
     return (
       <div className="mt-8 rounded-xl border border-line bg-paper p-5">
         <p className="text-sm text-ink-soft">
           Unable to load selected repositories.
         </p>
-
-        <RetryButton onClick={state.retry} />
       </div>
     );
   }
@@ -416,17 +349,8 @@ function RepoList({ state }) {
 }
 
 // Main GitHub activity section.
-export default function GitHubActivity() {
-  const profile = useGitHubProfile(github.username);
-
-  const repos = useGitHubPinned(
-    github.username,
-    github.pinnedRepos
-  );
-
-  const contributions = useGitHubContributions(
-    github.username
-  );
+export default async function GitHubActivity() {
+  const { profile, repos, contributions } = await getGitHubData();
 
   return (
     <section
