@@ -1,4 +1,6 @@
-import { useFadeInOnScroll } from "../hooks/useFadeInOnScroll";
+"use client";
+
+import { useFadeInOnScroll } from "@/hooks/useFadeInOnScroll";
 
 /** Fades and lifts content in once it scrolls into view. */
 export default function Reveal({ children, className = "", delayMs = 0 }) {
