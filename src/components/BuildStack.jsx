@@ -1,5 +1,5 @@
 
-import { buildStack } from "../data/content";
+import { buildStack } from "@/data/content";
 import Reveal from "./Reveal";
 
 import {
