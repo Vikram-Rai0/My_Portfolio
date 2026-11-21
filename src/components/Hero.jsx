@@ -1,5 +1,5 @@
-import { hero } from "../data/content";
-import profileImage from "../assets/Profile.jpg";
+import { hero } from "@/data/content";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -77,12 +77,13 @@ export default function Hero() {
 
           <figure className="relative z-10 w-[220px] rounded-2xl border border-line bg-paper p-2 shadow-[0_20px_45px_-25px_rgba(20,21,26,0.35)] sm:w-[260px]">
             <div className="aspect-[4/5] overflow-hidden rounded-xl bg-ink">
-              <img
-                src={profileImage}
+              <Image
+                src="/portrait.jpg"
                 alt={hero.avatarAlt}
-                width="260"
-                height="325"
-                decoding="async"
+                width={260}
+                height={325}
+                sizes="(min-width: 640px) 260px, 220px"
+                priority
                 className="h-full w-full object-cover"
               />
             </div>
