@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const CARD_SHADOW =
   "shadow-[0_10px_26px_-20px_rgba(20,21,26,0.35)] dark:shadow-none";
@@ -252,7 +252,7 @@ export function CaseStudyCta({ project }) {
         </p>
       </div>
 
-      <Link to={`/projects/${project.id}/case-study`} className={primaryButton}>
+      <Link href={`/projects/${project.id}/case-study`} className={primaryButton}>
         View Case Study
         <span aria-hidden="true">→</span>
       </Link>
@@ -263,7 +263,7 @@ export function CaseStudyCta({ project }) {
 function NavCard({ label, project, to, alignRight }) {
   return (
     <Link
-      to={to}
+      href={to}
       className={`group block rounded-xl border border-line bg-paper p-5 transition-colors hover:border-forest/40 ${CARD_SHADOW} ${
         alignRight ? "sm:text-right" : ""
       }`}
