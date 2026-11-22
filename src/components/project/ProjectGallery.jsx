@@ -1,5 +1,8 @@
+"use client";
+
+import Image from "next/image";
 import { useState } from "react";
-import { getVisual } from "../visuals";
+import { getVisual } from "@/components/visuals";
 
 /** Large preview with thumbnails. Falls back to the illustration without images. */
 export default function ProjectGallery({ project }) {
@@ -18,13 +21,14 @@ export default function ProjectGallery({ project }) {
       <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-line bg-paper-mist shadow-[0_18px_44px_-24px_rgba(20,21,26,0.45)] dark:shadow-[0_18px_44px_-24px_rgba(0,0,0,0.9)]">
         {images.length > 0 ? (
           images.map((src, i) => (
-            <img
+            <Image
               key={src}
               src={src}
               alt={`${project.title} screenshot ${i + 1} of ${images.length}`}
               aria-hidden={i !== current}
-              loading={i === 0 ? "eager" : "lazy"}
-              decoding="async"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              priority={i === 0}
               onError={() => markFailed(src)}
               className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-500 ${
                 i === current ? "opacity-100" : "opacity-0"
@@ -49,17 +53,17 @@ export default function ProjectGallery({ project }) {
                 onClick={() => setActive(i)}
                 aria-label={`Show screenshot ${i + 1}`}
                 aria-current={i === current}
-                className={`block aspect-[16/10] w-full overflow-hidden rounded-lg border transition-all ${
+                className={`relative block aspect-[16/10] w-full overflow-hidden rounded-lg border transition-all ${
                   i === current
                     ? "border-forest shadow-[0_8px_16px_-10px_rgba(20,21,26,0.5)]"
                     : "border-line opacity-70 hover:opacity-100"
                 }`}
               >
-                <img
+                <Image
                   src={src}
                   alt=""
-                  loading="lazy"
-                  decoding="async"
+                  fill
+                  sizes="(min-width: 1024px) 10vw, 20vw"
                   onError={() => markFailed(src)}
                   className="h-full w-full object-cover object-top"
                 />
