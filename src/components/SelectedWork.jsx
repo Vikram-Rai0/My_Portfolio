@@ -1,5 +1,6 @@
+"use client";
+
 import { useCallback, useEffect, useRef, useState } from "react";
-import { projects } from "../data/content";
 import ProjectCard from "./ProjectCard";
 import Reveal from "./Reveal";
 
@@ -34,7 +35,7 @@ function getCardLeft(track, card) {
   return card.offsetLeft - track.offsetLeft - paddingLeft;
 }
 
-export default function SelectedWork() {
+export default function SelectedWork({ projects }) {
   const trackRef = useRef(null);
   const [active, setActive] = useState(0);
 
@@ -113,6 +114,12 @@ export default function SelectedWork() {
             </div>
           </div>
         </Reveal>
+
+        {projects.length === 0 && (
+          <p className="mt-10 text-[15px] text-ink-soft">
+            Projects are being added. Check back soon.
+          </p>
+        )}
 
         <Reveal delayMs={100}>
           {/* Padding leaves room for card shadows. */}
