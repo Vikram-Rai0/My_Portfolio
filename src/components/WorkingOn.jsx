@@ -1,4 +1,4 @@
-import { currentlyWorking } from "../data/content";
+import { currentlyWorking } from "@/data/content";
 import Reveal from "./Reveal";
 
 function Column({ label, items, dashed = false }) {
