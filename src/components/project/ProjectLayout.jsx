@@ -1,20 +1,10 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { siteMeta } from "../../data/content";
+import Link from "next/link";
+import { siteMeta } from "@/data/content";
 import Footer from "../Footer";
 import ThemeToggle from "../ThemeToggle";
 
 /** Shared shell for project pages: sticky header with back link, theme toggle and footer. */
-export default function ProjectLayout({ title, children }) {
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = title;
-
-    return () => {
-      document.title = previousTitle;
-    };
-  }, [title]);
-
+export default function ProjectLayout({ children }) {
   return (
     <div className="min-h-screen bg-paper">
       <a
@@ -27,7 +17,7 @@ export default function ProjectLayout({ title, children }) {
       <header className="sticky top-0 z-50 border-b border-line/70 bg-paper/90 backdrop-blur">
         <div className="container-page flex h-16 items-center justify-between gap-4">
           <Link
-            to="/#work"
+            href="/#work"
             className="group inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-wide text-ink-soft transition-colors hover:text-ink"
           >
             <span
@@ -40,7 +30,7 @@ export default function ProjectLayout({ title, children }) {
           </Link>
 
           <Link
-            to="/"
+            href="/"
             className="hidden font-mono text-[13px] font-medium uppercase tracking-widest2 text-ink sm:block"
           >
             {siteMeta.name}
