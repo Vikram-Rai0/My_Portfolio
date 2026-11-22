@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import ProjectLayout from "./ProjectLayout";
 import { primaryButton } from "./blocks";
 
 export default function ProjectNotFound() {
   return (
-    <ProjectLayout title="Project not found — Vikram Rai">
+    <ProjectLayout>
       <section className="container-page flex min-h-[60vh] flex-col items-start justify-center gap-4 py-20">
         <p className="eyebrow">404</p>
         <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
@@ -14,7 +14,7 @@ export default function ProjectNotFound() {
           That project doesn’t exist or has moved. You can browse all projects
           from the homepage.
         </p>
-        <Link to="/#work" className={`mt-2 ${primaryButton}`}>
+        <Link href="/#work" className={`mt-2 ${primaryButton}`}>
           Back to projects
         </Link>
       </section>
