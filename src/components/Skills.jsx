@@ -11,7 +11,7 @@ import {
   Check,
 } from "lucide-react";
 
-import { skillGroups, skillExtras, skillsNote } from "../data/content";
+import { skillGroups, skillExtras, skillsNote } from "@/data/content";
 
 import ProgressBar from "./ProgressBar";
 import Reveal from "./Reveal";
