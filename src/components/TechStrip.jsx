@@ -1,5 +1,5 @@
 
-import { techMarquee } from "../data/content";
+import { techMarquee } from "@/data/content";
 
 const techLogos = {
   React: "react/react-original.svg",
